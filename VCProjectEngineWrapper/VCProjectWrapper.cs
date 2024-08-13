@@ -29,6 +29,8 @@ namespace VCProjectEngineWrapper
 		VCProjectWrapperVs2017
 #elif (VS2019)
 		VCProjectWrapperVs2019
+#elif (VS2022)
+		VCProjectWrapperVs2022
 #endif
 		: IVCProjectWrapper
 	{
@@ -41,6 +43,8 @@ namespace VCProjectEngineWrapper
 			VCProjectWrapperVs2017
 #elif (VS2019)
 			VCProjectWrapperVs2019
+#elif (VS2022)
+			VCProjectWrapperVs2022
 #endif
 			(object wrapped)
 		{
@@ -77,6 +81,8 @@ namespace VCProjectEngineWrapper
 						VCConfigurationWrapperVs2017
 #elif (VS2019)
 						VCConfigurationWrapperVs2019
+#elif (VS2022)
+						VCConfigurationWrapperVs2022
 #endif
 						(vcProjectConfig);
 					}
@@ -95,6 +101,8 @@ namespace VCProjectEngineWrapper
 			VCConfigurationWrapperVs2017
 #elif (VS2019)
 			VCConfigurationWrapperVs2019
+#elif (VS2022)
+			VCConfigurationWrapperVs2022
 #endif
 			(null);
 		}

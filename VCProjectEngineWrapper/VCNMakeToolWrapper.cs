@@ -26,6 +26,8 @@ namespace VCProjectEngineWrapper
 		VCNMakeToolWrapperVs2017
 #elif (VS2019)
 		VCNMakeToolWrapperVs2019
+#elif (VS2022)
+		VCNMakeToolWrapperVs2022
 #endif
 		: IVCNMakeToolWrapper
 	{
@@ -39,6 +41,8 @@ namespace VCProjectEngineWrapper
 			VCNMakeToolWrapperVs2017
 #elif (VS2019)
 			VCNMakeToolWrapperVs2019
+#elif (VS2022)
+			VCNMakeToolWrapperVs2022
 #endif
 			(object wrapped)
 		{

@@ -26,6 +26,8 @@ namespace VCProjectEngineWrapper
 		VCFileConfigurationWrapperVs2017
 #elif (VS2019)
 		VCFileConfigurationWrapperVs2019
+#elif (VS2022)
+		VCFileConfigurationWrapperVs2022
 #endif
 		: IVCFileConfigurationWrapper
 	{
@@ -38,6 +40,8 @@ namespace VCProjectEngineWrapper
 			VCFileConfigurationWrapperVs2017
 #elif (VS2019)
 			VCFileConfigurationWrapperVs2019
+#elif (VS2022)
+			VCFileConfigurationWrapperVs2022
 #endif
 			(object wrapped)
 		{
@@ -78,6 +82,8 @@ namespace VCProjectEngineWrapper
 				VCCLCompilerToolWrapperVs2017
 #elif (VS2019)
 				VCCLCompilerToolWrapperVs2019
+#elif (VS2022)
+				VCCLCompilerToolWrapperVs2022
 #endif
 				(tool);
 		}

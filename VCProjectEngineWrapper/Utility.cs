@@ -29,6 +29,8 @@ namespace VCProjectEngineWrapper
 				"15.0";
 #elif (VS2019)
 				"16.0";
+#elif (VS2022)
+				"17.0";
 #endif
 		}
 	}

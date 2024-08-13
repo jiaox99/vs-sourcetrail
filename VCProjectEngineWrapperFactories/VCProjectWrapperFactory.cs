@@ -27,6 +27,14 @@ namespace VCProjectEngineWrapper
 			IVCProjectWrapper Create(object wrapped);
 		}
 
+		private class FactoryModule2022 : IFactoryModule
+		{
+			public IVCProjectWrapper Create(object wrapped)
+			{
+				return new VCProjectWrapperVs2022(wrapped);
+			}
+		}
+
 		private class FactoryModule2019 : IFactoryModule
 		{
 			public IVCProjectWrapper Create(object wrapped)

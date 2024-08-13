@@ -26,6 +26,8 @@ namespace VCProjectEngineWrapper
 		VCPlatformWrapperVs2017
 #elif (VS2019)
 		VCPlatformWrapperVs2019
+#elif (VS2022)
+		VCPlatformWrapperVs2022
 #endif
 		: IVCPlatformWrapper
 	{
@@ -38,6 +40,8 @@ namespace VCProjectEngineWrapper
 			VCPlatformWrapperVs2017
 #elif (VS2019)
 			VCPlatformWrapperVs2019
+#elif (VS2022)
+			VCPlatformWrapperVs2022
 #endif
 			(object wrapped)
 		{

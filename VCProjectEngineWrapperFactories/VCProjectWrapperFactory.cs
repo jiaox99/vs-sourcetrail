@@ -68,6 +68,7 @@ namespace VCProjectEngineWrapper
 				modules = new Queue<IFactoryModule>();
 
 				// One of these modules will be working for each version of Visual Studio.
+				modules.Enqueue(new FactoryModule2022());
 				modules.Enqueue(new FactoryModule2019());
 				modules.Enqueue(new FactoryModule2017());
 				modules.Enqueue(new FactoryModule2015());

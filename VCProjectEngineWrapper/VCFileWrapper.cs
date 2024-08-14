@@ -16,6 +16,7 @@
 
 using Microsoft.VisualStudio.VCProjectEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace VCProjectEngineWrapper
@@ -82,7 +83,8 @@ namespace VCProjectEngineWrapper
 		public List<IVCFileConfigurationWrapper> GetFileConfigurations()
 		{
 			List<IVCFileConfigurationWrapper> fileConfigurations = new List<IVCFileConfigurationWrapper>();
-			foreach (Object configuration in (_wrapped.FileConfigurations as List<Object>))
+
+			foreach (Object configuration in (_wrapped.FileConfigurations as IEnumerable))
 			{
 				IVCFileConfigurationWrapper vcFileConfig = new
 #if (VS2015)
@@ -100,6 +102,7 @@ namespace VCProjectEngineWrapper
 					fileConfigurations.Add(vcFileConfig);
 				}
 			}
+
 			return fileConfigurations;
 		}
 	}

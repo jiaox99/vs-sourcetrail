@@ -193,7 +193,7 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 				IVCFileWrapper vcFile = VCFileWrapperFactory.create(item.Object);
 
 				IVCCLCompilerToolWrapper compilerTool = null;
-				if (!isMakefileProject)
+				if (!isMakefileProject && vcFile != null)
 				{
 					List<IVCFileConfigurationWrapper> vcFileConfigurations = vcFile.GetFileConfigurations();
 					foreach (IVCFileConfigurationWrapper vcFileConfiguration in vcFileConfigurations)

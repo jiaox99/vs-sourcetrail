@@ -178,7 +178,7 @@ namespace VCProjectEngineWrapper
 			List<IVCPropertySheetWrapper> propertySheetsWrappers = new List<IVCPropertySheetWrapper>();
 			try
 			{
-				IEnumerable wrappedPropertySheets = _wrapped.PropertySheets;
+				IEnumerable wrappedPropertySheets = _wrapped.PropertySheets as IEnumerable;
 				foreach (Object wrappedPropertySheet in wrappedPropertySheets)
 				{
 					VCPropertySheet vcPropertySheet = wrappedPropertySheet as VCPropertySheet;

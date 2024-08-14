@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="96811de8-9828-4c92-9520-48a48f3ea1f3" Version="2.1.2" Language="en-US" Publisher="Coati Software" />
+        <DisplayName>SourcetrailExtension2022</DisplayName>
+        <Description xml:space="preserve">This extension allows you to synchronize Visual Studio with Sourcetrail, a Clang based source code exploration tool. Additionally it lets you generate a Clang Compilation Database for any Visual Studio solution, which can also be used to run other Clang based tools.</Description>
+        <MoreInfo>https://www.sourcetrail.com/</MoreInfo>
+        <License>LICENSE.txt</License>
+        <GettingStartedGuide>https://www.sourcetrail.com/documentation/#VisualStudio</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/CoatiSoftware/vs-sourcetrail/blob/master/CHANGELOG.md</ReleaseNotes>
+        <Icon>sourcetrail.ico</Icon>
+        <Tags>C, C++, Navigation, diagram, graph, visualization, clang, Compilation Database</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+    </Assets>
+</PackageManifest>

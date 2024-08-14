@@ -72,7 +72,7 @@ namespace VCProjectEngineWrapper
 
 					if (vcProjectConfig != null &&
 						vcProjectConfig.ConfigurationName == configurationName &&
-						vcProjectConfig.Platform.Name == platformName)
+						(vcProjectConfig.Platform as VCPlatform).Name == platformName)
 					{
 						return new
 #if (VS2015)
@@ -125,7 +125,7 @@ namespace VCProjectEngineWrapper
 		public List<string> GetReferencedProjectNames()
 		{
 			List<string> referencedProjectNames = new List<string>();
-			foreach (Object o in _wrapped.VCReferences)
+			foreach (Object o in (_wrapped.VCReferences as List<Object>))
 			{
 				VCProjectReference projectReference = o as VCProjectReference;
 				if (projectReference != null)

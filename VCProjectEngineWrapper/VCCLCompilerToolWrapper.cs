@@ -92,7 +92,7 @@ namespace VCProjectEngineWrapper
 					return rawStandardString.Replace("stdcpp", "c++");
 				}
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Logging.LogInfo("Unable to fetch language standard from project configuration, using default standard instead.");
 			}

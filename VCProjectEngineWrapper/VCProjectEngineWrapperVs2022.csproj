@@ -71,5 +71,10 @@
       <Name>VCProjectEngineWrapperInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.VCProjectEngine">
+      <Version>17.10.40170</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

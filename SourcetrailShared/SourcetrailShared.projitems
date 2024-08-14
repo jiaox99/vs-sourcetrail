@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>d0dd0721-63aa-476e-9d40-ef4a8216f22c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SourcetrailShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)GlobalSuppressions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Guids.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Multitasking\LimitedThreadsTaskScheduler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PkgCmdID.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resources.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SolutionParser\CompilationDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SolutionParser\CompilationDatabaseSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SolutionParser\CompileCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SolutionParser\SolutionParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SolutionParser\VsPathResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SourcetrailExtensionPackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\CompilationDatabaseSettingsList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\CompileCommandFileWriter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\DataUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\FileUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\IPathResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkProtocolUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\NetworkUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\ProjectUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\QueuedFileWriter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\SolutionUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\StringUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\SystemUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Wizard\ProjectSetupWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Wizard\ProjectSetupWindow.Designer.cs">
+      <DependentUpon>ProjectSetupWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Wizard\WindowCdbReady.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Wizard\WindowCdbReady.Designer.cs">
+      <DependentUpon>WindowCdbReady.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Wizard\WindowCreateCdb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Wizard\WindowCreateCdb.Designer.cs">
+      <DependentUpon>WindowCreateCdb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Wizard\WindowMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Wizard\WindowMessage.Designer.cs">
+      <DependentUpon>WindowMessage.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)VSPackage.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Wizard\ProjectSetupWindow.resx">
+      <LastGenOutput>ProjectSetupWindow1.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <DependentUpon>ProjectSetupWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Wizard\WindowCdbReady.resx">
+      <DependentUpon>WindowCdbReady.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Wizard\WindowCreateCdb.resx">
+      <DependentUpon>WindowCreateCdb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Wizard\WindowMessage.resx">
+      <DependentUpon>WindowMessage.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)sourcetrail.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Resources\favicon_16x16.png" />
+  </ItemGroup>
+</Project>

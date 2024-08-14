@@ -82,7 +82,7 @@ namespace VCProjectEngineWrapper
 		public List<IVCFileConfigurationWrapper> GetFileConfigurations()
 		{
 			List<IVCFileConfigurationWrapper> fileConfigurations = new List<IVCFileConfigurationWrapper>();
-			foreach (Object configuration in _wrapped.FileConfigurations)
+			foreach (Object configuration in (_wrapped.FileConfigurations as List<Object>))
 			{
 				IVCFileConfigurationWrapper vcFileConfig = new
 #if (VS2015)

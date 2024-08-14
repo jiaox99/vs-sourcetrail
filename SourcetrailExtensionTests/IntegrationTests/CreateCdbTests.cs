@@ -242,7 +242,7 @@ namespace CoatiSoftware.SourcetrailExtension.Tests
 				Assert.IsTrue(platformNames.Count > 0, "No target platforms found in loaded solution.");
 
 				SolutionParser.SolutionParser solutionParser = new SolutionParser.SolutionParser(new TestPathResolver());
-				solutionParser.CreateCompileCommands(
+				solutionParser.CreateCompileCommandsAsync(
 					project, configurationNames[0], platformNames[0], "c11", null, nonSystemIncludesUseAngleBrackets,
 					(CompileCommand command) =>
 					{

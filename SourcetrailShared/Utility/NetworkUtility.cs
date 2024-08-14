@@ -77,7 +77,7 @@ namespace CoatiSoftware.SourcetrailExtension.Utility
 					_allDone.WaitOne();
 				}
 			}
-			catch (ThreadAbortException e)
+			catch (ThreadAbortException)
 			{
 				Logging.Logging.LogInfo("Socket listener was stopped for port " + ownPort.ToString() + ".");
 			}

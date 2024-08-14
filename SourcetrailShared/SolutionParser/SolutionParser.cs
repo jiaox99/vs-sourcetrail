@@ -17,6 +17,7 @@
 using CoatiSoftware.SourcetrailExtension.Utility;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -45,8 +46,9 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 			_pathResolver = pathResolver;
 		}
 
-		public void CreateCompileCommands(Project project, string solutionConfigurationName, string solutionPlatformName, string cStandard, string additionalClangOptions, bool nonSystemIncludesUseAngleBrackets, Action<CompileCommand> lambda)
+		public async System.Threading.Tasks.Task CreateCompileCommandsAsync(Project project, string solutionConfigurationName, string solutionPlatformName, string cStandard, string additionalClangOptions, bool nonSystemIncludesUseAngleBrackets, Action<CompileCommand> lambda)
 		{
+			await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 			Logging.Logging.LogInfo("Creating command objects for project \"" + Logging.Obfuscation.NameObfuscator.GetObfuscatedName(project.Name) + "\".");
 
 			DTE dte = project.DTE;

@@ -56,6 +56,7 @@ namespace CoatiSoftware.SourcetrailExtension.Wizard
 		private int _threadCount = 1;
 
 		private static object _lockObject = new object();
+		private static int projectsProcessed = 0;
 		private static ReaderWriterLockSlim _readWriteLock = new ReaderWriterLockSlim();
 
 		public OnFinishedCreatingCdb CallbackOnFinishedCreatingCdb
@@ -197,13 +198,13 @@ namespace CoatiSoftware.SourcetrailExtension.Wizard
 			return result;
 		}
 
-		private void CreateCompilationCommands(Utility.CompileCommandFileWriter fileWriter, EnvDTE.Project project, ref int projectsProcessed)
+		private async Task CreateCompilationCommandsAsync(Utility.CompileCommandFileWriter fileWriter, EnvDTE.Project project)
 		{
 			try
 			{
 				SolutionParser.SolutionParser solutionParser = new SolutionParser.SolutionParser(new VsPathResolver(_targetDir));
 
-				solutionParser.CreateCompileCommands(
+				await solutionParser.CreateCompileCommandsAsync(
 					project, _configurationName, _platformName, _cStandard, _additionalClangOptions, _nonSystemIncludesUseAngleBrackets,
 					(CompileCommand command) => { fileWriter.PushCommand(command); }
 				);
@@ -235,19 +236,15 @@ namespace CoatiSoftware.SourcetrailExtension.Wizard
 
 			try
 			{
-				Multitasking.LimitedThreadsTaskScheduler scheduler = new Multitasking.LimitedThreadsTaskScheduler(_threadCount);
-				TaskFactory factory = new TaskFactory(scheduler);
+				//Multitasking.LimitedThreadsTaskScheduler scheduler = new Multitasking.LimitedThreadsTaskScheduler(_threadCount);
+				//TaskFactory factory = new TaskFactory(scheduler);
 				List<Task> tasks = new List<Task>();
 
-				int projectsProcessed = 0;
 				foreach (EnvDTE.Project project in _projects.GetRange(0, _projects.Count))
 				{
 					Logging.Logging.LogInfo("Scheduling project \"" + Logging.Obfuscation.NameObfuscator.GetObfuscatedName(project.Name) + "\" for parsing.");
 
-					Task task = factory.StartNew(() =>
-					{
-						CreateCompilationCommands(fileWriter, project, ref projectsProcessed);
-					});
+					Task task = CreateCompilationCommandsAsync(fileWriter, project);
 
 					tasks.Add(task);
 				}
@@ -276,18 +273,21 @@ namespace CoatiSoftware.SourcetrailExtension.Wizard
 
 		private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
-			if(backgroundWorker1.CancellationPending == false)
+			this.Invoke((MethodInvoker)delegate
 			{
-				progressBar.Value = e.ProgressPercentage;
+				if (backgroundWorker1.CancellationPending == false)
+				{
+					progressBar.Value = e.ProgressPercentage;
 
-				labelStatus.Text = e.UserState as string;
-			}
-			else
-			{
-				progressBar.Value = 0;
+					labelStatus.Text = (e.UserState as string) + " "+ projectsProcessed + "/" + _projects.Count;
+				}
+				else
+				{
+					progressBar.Value = 0;
 
-				labelStatus.Text = "Cancelling...";
-			}
+					labelStatus.Text = "Cancelling...";
+				}
+			});
 		}
 
 		private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -301,7 +301,10 @@ namespace CoatiSoftware.SourcetrailExtension.Wizard
 				Logging.Logging.LogWarning("Cdb creation was aborted by user");
 			}
 
-			Close();
+			this.Invoke((MethodInvoker)delegate
+			{
+				Close();
+			});
 		}
 
 		private void WindowCreateCdb_FormClosed(object sender, FormClosedEventArgs e)

@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.0
+
+**2024-08-15**
+
+* Fix the threading issue
+
+	https://github.com/CoatiSoftware/vs-sourcetrail/issues/69
+
+* Upgrade to VS 2022
 
 ## 2.1.1
 

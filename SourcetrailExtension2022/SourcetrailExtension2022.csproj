@@ -83,18 +83,6 @@
       <Project>{f592db46-0c77-470b-aaf8-80c51f44380e}</Project>
       <Name>VCProjectEngineWrapperInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VCProjectEngineWrapper\VCProjectEngineWrapperVs2015.csproj">
-      <Project>{1c139999-9592-4891-aa62-2c8a16430d0a}</Project>
-      <Name>VCProjectEngineWrapperVs2015</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VCProjectEngineWrapper\VCProjectEngineWrapperVs2017.csproj">
-      <Project>{b49207f9-89a3-42d8-bc04-8bf77ed2e295}</Project>
-      <Name>VCProjectEngineWrapperVs2017</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VCProjectEngineWrapper\VCProjectEngineWrapperVs2019.csproj">
-      <Project>{1c982e5a-bf66-49de-a1bc-eea849be58e8}</Project>
-      <Name>VCProjectEngineWrapperVs2019</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VCProjectEngineWrapper\VCProjectEngineWrapperVs2022.csproj">
       <Project>{a0bd0d15-897c-4dc6-8f8d-df70a9310547}</Project>
       <Name>VCProjectEngineWrapperVs2022</Name>

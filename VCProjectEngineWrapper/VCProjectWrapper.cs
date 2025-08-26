@@ -125,7 +125,11 @@ namespace VCProjectEngineWrapper
 		public List<string> GetReferencedProjectNames()
 		{
 			List<string> referencedProjectNames = new List<string>();
+#if (VS2022)
+			foreach (Object o in _wrapped.VCReferences as dynamic)
+#else
 			foreach (Object o in (_wrapped.VCReferences as List<Object>))
+#endif
 			{
 				VCProjectReference projectReference = o as VCProjectReference;
 				if (projectReference != null)

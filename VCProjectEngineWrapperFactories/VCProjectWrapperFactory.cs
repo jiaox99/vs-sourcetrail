@@ -35,30 +35,6 @@ namespace VCProjectEngineWrapper
 			}
 		}
 
-		private class FactoryModule2019 : IFactoryModule
-		{
-			public IVCProjectWrapper Create(object wrapped)
-			{
-				return new VCProjectWrapperVs2019(wrapped);
-			}
-		}
-
-		private class FactoryModule2017 : IFactoryModule
-		{
-			public IVCProjectWrapper Create(object wrapped)
-			{
-				return new VCProjectWrapperVs2017(wrapped);
-			}
-		}
-
-		private class FactoryModule2015 : IFactoryModule
-		{
-			public IVCProjectWrapper Create(object wrapped)
-			{
-				return new VCProjectWrapperVs2015(wrapped);
-			}
-		}
-
 		private static Queue<IFactoryModule> modules = null;
 
 		public static IVCProjectWrapper create(object wrapped)
@@ -69,9 +45,6 @@ namespace VCProjectEngineWrapper
 
 				// One of these modules will be working for each version of Visual Studio.
 				modules.Enqueue(new FactoryModule2022());
-				modules.Enqueue(new FactoryModule2019());
-				modules.Enqueue(new FactoryModule2017());
-				modules.Enqueue(new FactoryModule2015());
 			}
 
 			IVCProjectWrapper wrapper = null;

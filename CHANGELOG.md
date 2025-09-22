@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.0.1
+
+**2025-09-22**
+* Filter out unsupported compile flags
+	* -Zx
+	* -bigobj
+	* -wxxxx
+	* /FS
+* Fix the crash when create db the second time
+
 ## 3.0.0
 
 **2024-08-15**

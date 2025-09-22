@@ -268,6 +268,7 @@ namespace CoatiSoftware.SourcetrailExtension.Wizard
 
 		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
 		{
+			projectsProcessed = 0;
 			_result = CreateCdb();
 		}
 

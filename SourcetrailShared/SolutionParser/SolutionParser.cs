@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using VCProjectEngineWrapper;
 
 namespace CoatiSoftware.SourcetrailExtension.SolutionParser
@@ -226,6 +227,8 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 
 						additionalOptions = additionalOptions.Replace("$(NOINHERIT)", "");
 						additionalOptions = additionalOptions.Replace("$(INHERIT)", "");
+						additionalOptions = additionalOptions.Replace(" -bigobj", "");
+						additionalOptions = Regex.Replace(additionalOptions, @"\s\/[a-zA-Z0-9:_\-]+", "");
 						additionalOptions = additionalOptions.Trim();
 					}
 					additionalOptions = additionalOptions.Replace("-std:", "-std=");

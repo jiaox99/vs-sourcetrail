@@ -227,9 +227,10 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 
 						additionalOptions = additionalOptions.Replace("$(NOINHERIT)", "");
 						additionalOptions = additionalOptions.Replace("$(INHERIT)", "");
-						additionalOptions = additionalOptions.Replace("-bigobj ", "");
+						additionalOptions = Regex.Replace(additionalOptions, @"\s(-|\/)bigobj", "");
 						additionalOptions = Regex.Replace(additionalOptions, @"-Z\w\s", "");
 						additionalOptions = Regex.Replace(additionalOptions, @"-w\d+\s", "");
+						additionalOptions = Regex.Replace(additionalOptions, @"\/external:I", "-I");
 						additionalOptions = Regex.Replace(additionalOptions, @"\/[a-zA-Z0-9:_\-]+\s", "");
 						additionalOptions = additionalOptions.Trim();
 					}

@@ -228,10 +228,12 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 						additionalOptions = additionalOptions.Replace("$(NOINHERIT)", "");
 						additionalOptions = additionalOptions.Replace("$(INHERIT)", "");
 						additionalOptions = Regex.Replace(additionalOptions, @"\s(-|\/)bigobj", "");
-						additionalOptions = Regex.Replace(additionalOptions, @"-Z\w\s", "");
-						additionalOptions = Regex.Replace(additionalOptions, @"-w\d+\s", "");
+						additionalOptions = Regex.Replace(additionalOptions, @"\s-Z\w", "");
+						additionalOptions = Regex.Replace(additionalOptions, @"\s-w\d+", "");
 						additionalOptions = Regex.Replace(additionalOptions, @"\/external:I", "-I");
-						additionalOptions = Regex.Replace(additionalOptions, @"\/[a-zA-Z0-9:_\-]+\s", "");
+						// remove options that take a parameter along with them
+						// .e.g /arch:SSE4.2
+						additionalOptions = Regex.Replace(additionalOptions, @"\s\/[a-zA-Z0-9:_\-\.]+", "");
 						additionalOptions = additionalOptions.Trim();
 					}
 					additionalOptions = additionalOptions.Replace("-std:", "-std=");

@@ -227,7 +227,7 @@ namespace CoatiSoftware.SourcetrailExtension
 			OptionPageGrid._obfuscationToggled = new OptionPageGrid.Callback(OnObfuscationToggled);
 
 			// register the extension UI elements
-			OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+			OleMenuCommandService mcs = await GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
 			if (null != mcs)
 			{
 				CommandID setActiveTokenCommandID = new CommandID(GuidList.guidSourcetrailExtensionCmdSet, (int)PkgCmdIDList.cmdidSourcetrailSetActiveToken);
@@ -248,7 +248,7 @@ namespace CoatiSoftware.SourcetrailExtension
 			}
 
 			// register callbacks to enable/disable interaction for eligible solutions
-			DTE dte = (DTE)GetService(typeof(DTE));
+			DTE dte = (DTE)await GetServiceAsync(typeof(DTE));
 			_solutionEvents = dte.Events.SolutionEvents;
 
 			_solutionEvents.Opened += OnSolutionOpened;

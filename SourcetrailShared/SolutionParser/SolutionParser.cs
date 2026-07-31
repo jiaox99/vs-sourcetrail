@@ -136,7 +136,7 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 
 					foreach (string prepDef in preprocessorDefinitions)
 					{
-						commandFlags += " -D " + prepDef + " ";
+						commandFlags += " -D " + FormatPreprocessorDefinition(prepDef) + " ";
 					}
 
 					foreach (string file in forcedIncludeFiles)
@@ -179,6 +179,35 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 			{
 				Logging.Logging.LogError("No project configuration found. Skipping this project");
 			}
+		}
+
+		// escapes already-quoted macro values (e.g. IMGUI_USER_CONFIG="imgui_frostbite.h") so the quotes survive being
+		// passed on to clang-tool, and wraps macro expressions containing whitespace
+		// (e.g. SQLITE_DEFAULT_MMAP_SIZE=8ULL * 1024ULL * 1024ULL * 1024ULL) in quotes so they are treated as one token
+		static private string FormatPreprocessorDefinition(string definition)
+		{
+			int equalsIndex = definition.IndexOf('=');
+			if (equalsIndex < 0)
+			{
+				return definition;
+			}
+
+			string name = definition.Substring(0, equalsIndex);
+			string value = definition.Substring(equalsIndex + 1);
+
+			if (value.Length >= 2 && value.StartsWith("\"") && value.EndsWith("\""))
+			{
+				value = "\\\"" + value.Substring(1, value.Length - 2) + "\\\"";
+			}
+			else if (value.Contains(" "))
+			{
+				// /DSQLITE_DEFAULT_MMAP_SIZE = 8ULL * 1024ULL * 1024ULL * 1024ULL
+				// ==>
+				// -D "SQLITE_DEFAULT_MMAP_SIZE = 8ULL * 1024ULL * 1024ULL * 1024ULL"
+				return "\"" + name + "=" + value + "\"";
+			}
+
+			return name + "=" + value;
 		}
 
 		private CompileCommand CreateCompileCommand(ProjectItem item, string commandFlags, string vcStandard, string cStandard, bool isMakefileProject)
@@ -378,32 +407,32 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 		{
 			Logging.Logging.LogInfo("Determining CL.exe (C++ compiler) version");
 
-			int majorCompilerVersion = -1;
+			string compilerVersion = null;
 
 			{
 				IVCCLCompilerToolWrapper compilerTool = vcProjectConfiguration.GetCLCompilerTool();
 				if (compilerTool != null && compilerTool.isValid())
 				{
-					majorCompilerVersion = GetCLMajorVersion(compilerTool, vcProjectConfiguration);
+					compilerVersion = GetCLVersion(compilerTool, vcProjectConfiguration);
 				}
 			}
 
-			if (majorCompilerVersion > -1)
+			if (compilerVersion != null)
 			{
-				Logging.Logging.LogInfo("Found compiler version " + majorCompilerVersion.ToString());
+				Logging.Logging.LogInfo("Found compiler version " + compilerVersion);
 
-				_compatibilityVersionFlag = _compatibilityVersionFlagBase + majorCompilerVersion.ToString();
+				_compatibilityVersionFlag = _compatibilityVersionFlagBase + compilerVersion;
 				return;
 			}
 		}
 
-		static private int GetCLMajorVersion(IVCCLCompilerToolWrapper compilerTool, IVCConfigurationWrapper vcProjectConfig)
+		static private string GetCLVersion(IVCCLCompilerToolWrapper compilerTool, IVCConfigurationWrapper vcProjectConfig)
 		{
 			Logging.Logging.LogInfo("Looking up CL.exe (C++ compiler)");
 
 			if (compilerTool == null || !compilerTool.isValid() || vcProjectConfig == null || !vcProjectConfig.isValid())
 			{
-				return -1;
+				return null;
 			}
 
 			try
@@ -428,9 +457,9 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 					if (File.Exists(path))
 					{
 						FileVersionInfo info = FileVersionInfo.GetVersionInfo(path);
-						int version = info.FileMajorPart;
+						string version = info.FileMajorPart.ToString() + "." + info.FileMinorPart.ToString();
 
-						Logging.Logging.LogInfo("Found compiler location. Compiler tool version is " + version.ToString());
+						Logging.Logging.LogInfo("Found compiler location. Compiler tool version is " + version);
 
 						return version;
 					}
@@ -443,7 +472,7 @@ namespace CoatiSoftware.SourcetrailExtension.SolutionParser
 
 			Logging.Logging.LogWarning("Failed to find C++ compiler tool.");
 
-			return -1;
+			return null;
 		}
 
 		static private string GetFileExtension(ProjectItem item)

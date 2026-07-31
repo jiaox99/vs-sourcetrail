@@ -249,7 +249,9 @@ namespace CoatiSoftware.SourcetrailExtension.Wizard
 					tasks.Add(task);
 				}
 
+#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
 				Task.WaitAll(tasks.ToArray());
+#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
 
 				fileWriter.StopWorking();
 
